@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 
 import Mi_Api from "./componentes/mi_api/Mi_Api";
+import Buscador from "./componentes/buscador/Buscador";
 
 function App() {
   const [buscar, setBuscar] = useState("");
@@ -13,17 +14,7 @@ function App() {
         <Mi_Api buscar={buscar} />
       </div>
       <h4>busca a tu mono</h4>
-      <div className="input-group mb-3">
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Ingresar"
-          value={buscar}
-          onChange={(e) => {
-            setBuscar(e.target.value);
-          }}
-        />
-      </div>
+      <Buscador setBuscar={setBuscar} />
     </>
   );
 }
