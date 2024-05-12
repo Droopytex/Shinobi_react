@@ -1,17 +1,28 @@
-import Mi_Api from "./componentes/mi_api/Mi_Api";
+import { useState } from "react";
 import "./App.css";
-import Buscador from "./componentes/buscador/Buscador";
+
+import Mi_Api from "./componentes/mi_api/Mi_Api";
 
 function App() {
+  const [buscar, setBuscar] = useState("");
   return (
     <>
+      <div></div>
       <h1>Hola todos, aquí vamos de nuevo</h1>
       <div>
-        <Mi_Api />
+        <Mi_Api buscar={buscar} />
       </div>
       <h4>busca a tu mono</h4>
-      <div>
-        <Buscador />
+      <div className="input-group mb-3">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Ingresar"
+          value={buscar}
+          onChange={(e) => {
+            setBuscar(e.target.value);
+          }}
+        />
       </div>
     </>
   );
