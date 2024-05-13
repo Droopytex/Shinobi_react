@@ -10,9 +10,7 @@ function App() {
     <>
       <div></div>
       <h1>Hola todos, aquí vamos de nuevo</h1>
-      <div>
-        <Mi_Api buscar={buscar} />
-      </div>
+      <div></div>
       <h4>busca a tu mono</h4>
       <Buscador setBuscar={setBuscar} />
     </>

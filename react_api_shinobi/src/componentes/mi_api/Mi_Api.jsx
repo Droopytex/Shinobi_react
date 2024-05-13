@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
-
+import MyCard from "../mycard/MyCard";
 // eslint-disable-next-line react/prop-types
 const Mi_Api = ({ buscar }) => {
   const [info, setInfo] = useState([]);
-  const url = "https://narutodb.xyz/api/character?page=1&limit=20";
+  const url = "https://api.boostr.cl/feriados/en.json";
   const consultarApi = async () => {
     try {
       const response = await fetch(url);
       const data = await response.json();
-      const personajes = data.characters;
-      console.log(personajes);
+      const fecha = data.date;
+      console.log(fecha);
 
-      setInfo(personajes);
+      setInfo(fecha);
     } catch (error) {
       console.log("No logramos entrar a los datos");
     }
@@ -20,27 +20,33 @@ const Mi_Api = ({ buscar }) => {
     consultarApi();
   }, []);
 
-  let mostrarPersonaje = [];
+  let mostrarFecha = [];
   if (buscar === "") {
-    mostrarPersonaje = { info };
+    mostrarFecha = { info };
   } else {
-    mostrarPersonaje = info.filter((personaje) =>
-      // eslint-disable-next-line react/prop-types
-      personaje.name.toLowerCase().includes(buscar.toLowerCase())
+    mostrarFecha = info.filter((fecha) =>
+      //     // eslint-disable-next-line react/prop-types
+      fecha.title.toLowerCase().includes(buscar.toLowerCase())
     );
   }
 
   return (
     <>
-      <div>
-        {info.map((personajes, id) => (
-          <p key={id}>{`${personajes.name} - ${personajes.jutsu}`}</p>
-        ))}
-        {mostrarPersonaje.length == 0 ? (
-          <p>No se encontraron resultados</p>
-        ) : (
-          ""
-        )}
+      <div className="container">
+        <div className="row">
+          {mostrarFecha.map((fecha) => (
+            <div key={id} className="col-sm-6 col-md-4 col-lg-3">
+              {/* Renderiza una tarjeta para cada personaje utilizando MyCard */}
+              <MyCard
+                key={id}
+                date={`${fecha.date}`}
+                title={`${fecha.title}`}
+                type={`${fecha.type}`}
+                extra={`${fecha.extra}`}
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );
